@@ -1,0 +1,18 @@
+### OPEN VINO ENV VARIABLES ###
+source $OPEN_VINO_PATH/bin/setupvars.sh
+
+# VINO Downloader PATH
+export VINO_DOWNLOADER_PATH=$OPEN_VINO_PATH/deployment_tools/tools/model_downloader
+
+# VINO Downloader Alias
+alias vino_downloader=$VINO_DOWNLOADER_PATH/downloader.py
+
+# Model Optimizer PATH
+export VINO_MODEL_OPTIMIZER_PATH=$OPEN_VINO_PATH/deployment_tools/model_optimizer
+
+# Model Optimizer Aliases
+alias mo_caffe=$VINO_MODEL_OPTIMIZER_PATH/mo_caffe.py
+alias mo_tf=$VINO_MODEL_OPTIMIZER_PATH/mo_tf.py
+alias mo_maxnet=$VINO_MODEL_OPTIMIZER_PATH/mo_maxnet.py
+alias mo_onnx=$VINO_MODEL_OPTIMIZER_PATH/mo_onnx.py
+alias mo_kaldi=$VINO_MODEL_OPTIMIZER_PATH/mo_kaldi.py
