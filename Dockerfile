@@ -1,13 +1,9 @@
 FROM ubuntu:16.04
 ENV http_proxy $HTTP_PROXY
 ENV https_proxy $HTTPS_PROXY
-ARG OPEN_VINO_PATH=/opt/intel/openvino
-ARG VINO_DOWNLOADER_PATH=$OPEN_VINO_PATH/deployment_tools/tools/model_downloade
-ARG VINO_MODEL_OPTIMIZER_PATH=$OPEN_VINO_PATH/deployment_tools/model_optimizer
 ARG DOWNLOAD_LINK=http://registrationcenter-download.intel.com/akdlm/irc_nas/15792/l_openvino_toolkit_p_2019.2.275.tgz
 ARG INSTALL_DIR=/opt/intel/openvino
 ARG TEMP_DIR=/tmp/openvino_installer
-COPY src/. /root/.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     cpio \
@@ -26,13 +22,18 @@ RUN $INSTALL_DIR/install_dependencies/install_openvino_dependencies.sh
 RUN mkdir $INSTALL_DIR/deployment_tools/inference_engine/samples/build && cd $INSTALL_DIR/deployment_tools/inference_engine/samples/build && \
     /bin/bash -c "source $INSTALL_DIR/bin/setupvars.sh && cmake .. && make -j1"
 
-RUN apt-get install python3-pip -y && \
-    pip3 install setuptools wheel opencv-python
+WORKDIR /root
+COPY src/. /root/.
+COPY env_config_variables.sh .
+COPY variables.txt .
+RUN apt-get install python3-pip -y &&\
+    pip3 install setuptools wheel opencv-python &&\
+    apt-get install nano
 
-
-#RUN cd /tmp/ && \
+#RUN apt-get install unzip &&\
 #    wget https://github.com/libusb/libusb/archive/v1.0.22.zip && \
-#    unzip v1.0.22.zip && cd libusb-1.0.22 && \
+#    unzip v1.0.22.zip &&\
+#    cd libusb-1.0.22 &&\
 #    ./bootstrap.sh && \
 #    ./configure --disable-udev --enable-shared && \
 #    make -j4 && make install && \

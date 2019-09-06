@@ -8,13 +8,17 @@ docker build . -t openvino
 
 ```
 docker run -it openvino
-docker run --privileged –v /dev:/dev <image_name>
+docker run -it --privileged=true openvino
 ```
 
 ## Definindo variáveis de ambiente
 
 ```
 ~/# sh env_config_variables.sh
+/opt/intel/openvino
+
+~/# source $OPEN_VINO_PATH/bin/setupvars.sh
+~/# source ~/.bashrc
 ```
 
 ## Executando o exemplo
