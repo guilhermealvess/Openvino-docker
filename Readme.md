@@ -8,7 +8,9 @@ docker build . -t openvino
 
 ```
 docker run -it openvino
-docker run -it --privileged=true openvino
+
+# MODO Movidius™ Neural Compute Stick
+docker run -it --privileged=true openvino --network=host
 ```
 
 ## Definindo variáveis de ambiente
@@ -17,8 +19,8 @@ docker run -it --privileged=true openvino
 ~/# sh env_config_variables.sh
 /opt/intel/openvino
 
-~/# source $OPEN_VINO_PATH/bin/setupvars.sh
 ~/# source ~/.bashrc
+~/# sh /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh
 ```
 
 ## Executando o exemplo

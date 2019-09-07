@@ -1,5 +1,6 @@
 import cv2
 
+
 def predict(frame, net):
     # Prepare input blob and perform an inference
     blob = cv2.dnn.blobFromImage(frame, size=(300, 300), ddepth=cv2.CV_8U)
@@ -21,17 +22,20 @@ def predict(frame, net):
     # return the list of predictions to the calling function
     return predictions
 
+
 # Load the model
-net = cv2.dnn.readNet('face-detection-adas-0001.xml', 'face-detection-adas-0001.bin')
+net = cv2.dnn.readNet('face-detection-adas-0001.xml',
+                      'face-detection-adas-0001.bin')
 
 # Specify target device
 net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 cap = cv2.VideoCapture(0)
 
 # Read an image
-while cv2.waitKey(1) <0:
-	
+while cv2.waitKey(1) < 0:
+
 	ret, frame = cap.read()
+    frame = cv2.resize(frame,(300,300))
 	predictions = predict(frame, net)
 
 	# Draw detected faces on the frame
@@ -42,8 +46,8 @@ while cv2.waitKey(1) <0:
 		xmax = int(prediction[5] * frame.shape[1])
 		ymax = int(prediction[6] * frame.shape[0])
 
-		cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), color=(0, 255, 0))
-
+		# cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), color=(0, 255, 0))
+        print(confidence)
 	# Save the frame to an image file
 	cv2.imshow('out.bmp', frame)
 cv2.destroyAllWindows()

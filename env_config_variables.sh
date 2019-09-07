@@ -1,4 +1,4 @@
-echo "Digite o path do Open VINO"
+echo "Digite o path do Open VINO: /opt/intel/openvino"
 read open_vino_path
 echo "" >> ~/.bashrc
 echo "####################### OPEN VINO VARIABLES CONFIG #############################" >> ~/.bashrc
