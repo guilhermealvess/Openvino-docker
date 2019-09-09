@@ -46,8 +46,8 @@ while cv2.waitKey(1) < 0:
 		xmax = int(prediction[5] * frame.shape[1])
 		ymax = int(prediction[6] * frame.shape[0])
 
-		# cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), color=(0, 255, 0))
         print(confidence)
+		cv2.rectangle(frame, (xmin, ymin), (xmax, ymax), color=(0, 255, 0))
 	# Save the frame to an image file
 	cv2.imshow('out.bmp', frame)
 cv2.destroyAllWindows()
