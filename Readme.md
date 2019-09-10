@@ -10,7 +10,8 @@ docker build . -t openvino
 docker run -it openvino
 
 # MODO Movidius™ Neural Compute Stick
-docker run -it --privileged=true openvino --network=host
+xhost +
+docker run -it --privileged=true --network="host" -v /dev:/dev -e DISPLAY = $DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix openvino
 ```
 
 ## Definindo variáveis de ambiente
@@ -20,7 +21,10 @@ docker run -it --privileged=true openvino --network=host
 /opt/intel/openvino
 
 ~/# source ~/.bashrc
-~/# sh /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh
+~/# cd /opt/intel/openvino/install_dependencies
+~/# sudo -E ./install_openvino_dependencies.sh
+~/# cd /opt/intel/openvino/deployment_tools/model_optimizer/install_prerequisites
+~/# sudo ./install_prerequisites.sh
 ```
 
 ## Executando o exemplo
